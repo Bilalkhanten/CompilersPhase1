@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1460486312 source:c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.cpp
+	"InputTokenizer.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1459079086 c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.h
+	<map>
+	<vector>
+	<string>
+
+1460486700 source:c:\users\mohamed\documents\workspace\lol_last\main.cpp
+
+1460489637 c:\users\mohamed\documents\workspace\lol_last\nfabuilder.h
+	"InputTokenizer.h"
+	<vector>
+	<set>
+	<stack>
+
+1459103318 c:\users\mohamed\documents\workspace\lol_last\outputparser.h
+	"NFABuilder.h"
+	<map>
+
+1460490829 source:c:\users\mohamed\documents\workspace\lol_last\main1.cpp
+
+1460490756 source:c:\users\mohamed\documents\workspace\lol_last\nfabuilder.cpp
+	"NFABuilder.h"
+	<stack>
+	<iostream>
+
+1459105810 source:c:\users\mohamed\documents\workspace\lol_last\outputparser.cpp
+	"outputParser.h"
+	<fstream>
+	<iostream>
+
+1460476620 source:c:\users\mohamed\documents\workspace\lol_last\dfabuilder.cpp
+	"DFABuilder.h"
+
+1460478103 c:\users\mohamed\documents\workspace\lol_last\dfabuilder.h
+	"NFABuilder.h"
+
+1460490832 source:c:\users\mohamed\documents\workspace\lol_last\main_test.cpp
+	<iostream>
+	"NFABuilder.h"
+
