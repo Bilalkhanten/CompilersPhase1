@@ -1,0 +1,38 @@
+%{
+#include<stdio.h>
+%}
+%%
+"if" {printf("if");}
+"else" {printf("else");}
+"while" {printf("while");}
+"for" {printf("for");}
+"do" {printf("do");}
+"main" {printf("main");}
+"boolean" {printf("boolean");}
+"string" {printf("string");}
+"float" {printf("float");}
+"int" {printf("int");}
+"double" {printf("double");}
+"long" {printf("long");}
+[a-z|A-Z][a-z|A-Z|0-9]* {printf("Identifier");}
+[0-9]+|[0-9]+"."[0-9]+(E[0-9]+)?  {printf("number");}
+==|!=|>|<=|>=|<  {printf("relop");}
+"+"|- {printf("addop");}
+"*"|"/" {printf("mulop");}
+";" {printf(";");}
+"," {printf(",");}
+"(" {printf("(");}
+")" {printf(")");}
+"}" {printf("}");}
+"{" {printf("{");}
+"!"|"@"|"&"|"^"|"%"|"$"|"#" {printf("Special Character");}
+%%
+int yywrap()
+{
+return 1;
+}
+main()
+{
+printf("Enter the code Line by Line \n");
+yylex();
+}

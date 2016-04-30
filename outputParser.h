@@ -17,6 +17,8 @@ class outputParser
     aGraph * g;
     std::map<int,std::string> *finalStates;
     int findEdge(int node,char ch);
+    bool isDummy(int node);
+    std::string removeSlash(std::string s);
 };
 
 #endif // OUTPUTPARSER_H

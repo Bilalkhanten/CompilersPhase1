@@ -404,6 +404,8 @@ graph * NFABuilder::build()
     std::map <std::string,std::string>::iterator it = inTok.tokens.begin();
     /* let's start with the first toke in the tokens list */
     graph * g1 = connect2(toPostfix(it->first, it->second));
+//    graph * g1 = toPostfix(it->first, it->second);
+
     /* make a core graph from this first token */
     for( ++it;it != inTok.tokens.end() ;it++)
     {
@@ -435,8 +437,7 @@ void Node::addEdge(Node * n1, char inp)
 /* test and debug funcs */
 void NFABuilder::test()
 {
-//    string exp = "a+(d|c)*";
-    string exp = "(a|b)((a)|(b)|(1))*";
+    string exp = "a+(d|c)*";
     graph * g =  toPostfix("lol", exp);
 //    printGraph(g);
     printAGraph(adapt(g));

@@ -14,7 +14,7 @@ for more read the main.cpp file.
 #include <stack>
 
 
-#define DEBUG_MODE
+//#define DEBUG_MODE
 typedef std::vector<std::vector< std::pair <int, char> > > aGraph;
 /* typedef for integration between NFA part and DFA part */
 

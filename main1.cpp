@@ -1,42 +1,19 @@
 //#include <bits/stdc++.h>
+//
 //#include "InputTokenizer.h"
 //#include "NFABuilder.h"
+//#include "NFA2DFA.h"
+//
 //#define pb push_back
 //#define mp make_pair
 //#define f first
 //#define s second
+//
 //#define MAX_STATE 1000
 //#define MAX_INPUT 250
 //using namespace std;
-//// representation of NFA state
-//class NFA_state
-//{
-//    public:
-//        int transitions[MAX_INPUT][MAX_STATE];
-//        NFA_state()
-//        {
-//            for(int i=0;i<MAX_INPUT;i++)
-//                for(int j=0;j<MAX_STATE;j++)
-//                    transitions[i][j]=-1;
-//        }
-//}*NFA_states;
-//// representation of DFA state
-//struct DFA_state
-//{
-//    bool finalState;
-//    string finalDFA_name;
-//    bitset<MAX_STATE>NFA2DFA_states; // NFA states that is composed in one DFA state
-//    bitset<MAX_STATE>transitions[MAX_INPUT]; // transition NFA states of this DFA state on input i=0,1,2, ... MAX_INPUT
-//    int Transitions[MAX_INPUT];// (DFA) transition from current DFA state to -> Transitions[i] on input i where i=0,1,2, ... MAX_INPUT
-//};
-//
-//set<int>NFA_finalStates;
-//vector<int> DFA_finalStates;
-//vector<DFA_state*> DFA_states;
-//stack<int> unmarked_DFA_states;
-//std::map<int,std::string> finalNodesA;
-//std::map<std::string,int> priorities;
 //int N,M,D; //no of states and input size
+//bool finalst[MAX_STATE]; // boolean to flag final NFA states
 //
 ////set of NFA states reachable from NFA state "state" on epsilon transitions alone
 ////or closure(s) and save it in "closure"
@@ -74,49 +51,47 @@
 //            NFA_move(i,input,b);
 //        }
 //}
-//bool finalst[MAX_STATE];
+//
 //void NFA2DFA()
 //{
 //    D=1;
+//    //node 0 in NFA is the start node in the DFA states
 //    DFA_states.pb(new DFA_state);
 //    DFA_states[0]->NFA2DFA_states[0]=1;
-//    epsilonClosure(0,DFA_states[0]->NFA2DFA_states);
+//    epsilonClosure(0,DFA_states[0]->NFA2DFA_states);// all nodes in the epsilon closure of the start node are included in the first DFA state
 //    // check if the first state is an accepting one
 //    int pr=10000000,indx=-1;
-//    cout<<finalNodesA.size()<<" tr\n";
-////    cout<<finalNodesA[0]<<" ramadan"<<endl;
-//    for(int i=0;i<N;i++)
-//        if(DFA_states[0]->NFA2DFA_states[i]==1&&finalNodesA.find(i)!=finalNodesA.end())
+//    for(int i=0;i<N+10;i++)
+//        if(DFA_states[0]->NFA2DFA_states[i]==1&&finalNodesA.find(i)!=finalNodesA.end())// if any NFA node in the composed DFA first state is an accepting state
 //        {
-////            cout<<"h "<<i<<" "<<finalNodesA[i]<<endl;
+//            //find the most priority final state
 //            if(priorities[finalNodesA[i]]<pr)
 //            {
 //                pr=priorities[finalNodesA[i]];
 //                indx=i;
-////                cout<<indx<<endl;
 //            }
 //        }
-////    cout<<indx<<endl;
+//    // if the first DFA state contains NFA final states, set this DFA state to be a final one
 //    if(indx!=-1)
 //    {
 //        DFA_states[0]->finalState=true;
 //        DFA_finalStates.pb(0);
 //        finalst[0]=1;
 //        DFA_states[0]->finalDFA_name=finalNodesA[indx];
-////        cout<<DFA_states[0]->finalDFA_name<<endl;
+//        DFA_states[0]->prio=pr;
 //    }
 //    unmarked_DFA_states.push(0);
 //    while(!unmarked_DFA_states.empty())
 //    {
 //        int x=unmarked_DFA_states.top();
-////        cout<<"X : "<<x<<endl;
 //        unmarked_DFA_states.pop();
+//        //for all possiple input except the epsilon
 //        for(int i=1;i<=M;i++)
 //        {
+//            //move state "x" to input i and store the result in DFA_states[x]->transitions[i]
 //            NFA_move(DFA_states[x]->NFA2DFA_states,i,DFA_states[x]->transitions[i]);
+//            //combine each state with its epsilon closure
 //            epsilonClosure(DFA_states[x]->transitions[i],DFA_states[x]->transitions[i]);
-//
-//
 //            // check whether the state that we move to is a new DFA state or not
 //            int j;
 //            for(j=0;j<D;j++)
@@ -132,22 +107,22 @@
 //                DFA_states[D]->NFA2DFA_states=DFA_states[x]->transitions[i];
 //                // check whether state D is an accepting state or not
 //                int pr=10000000,indx=-1;
-//                for(int j=0;j<N;j++)
-//                    if(DFA_states[D]->NFA2DFA_states[j]==1&&finalNodesA.find(j)!=finalNodesA.end())
+//                for(int k=0;k<N+10;k++)
+//                    if(DFA_states[D]->NFA2DFA_states[k]==1&&finalNodesA.find(k)!=finalNodesA.end())
 //                    {
-//                        if(priorities[finalNodesA[i]]<pr)
+//                        if(priorities[finalNodesA[k]]<pr)
 //                        {
-//                            pr=priorities[finalNodesA[i]];
-//                            indx=i;
+//                            pr=priorities[finalNodesA[k]];
+//                            indx=k;
 //                        }
 //                    }
-////                cout<<"indx : "<<indx<<endl;
 //                if(indx!=-1)
 //                {
 //                    DFA_states[D]->finalState=true;
 //                    DFA_finalStates.pb(D);
 //                    finalst[D]=1;
 //                    DFA_states[D]->finalDFA_name=finalNodesA[indx];
+//                    DFA_states[D]->prio=pr;
 //                }
 //                unmarked_DFA_states.push(D);
 //                D++;
@@ -156,42 +131,7 @@
 //    }
 //}
 //
-//void test()
-//{
-//    // read NFA
-//    cin>>N;
-//    M=10;
-//    NFA_states=new NFA_state[N+10];
-//    int f;
-//    cin>>f;
-//    for(int i=0;i<f;i++)
-//    {
-//        int x;
-//        cin>>x;
-//        NFA_finalStates.insert(x);
-//    }
-//    int t;
-//    cin>>t;
-//    while(t--)
-//    {
-//        int from,input,n,to;
-//        cin>>from>>input>>n;
-//        for(int i=0;i<n;i++)
-//        {
-//            cin>>to;
-//            NFA_states[from].transitions[input][i]=to;
-//        }
-//    }
-//    NFA2DFA();
-//    // write DFA
-//    cout<<D<<" "<<M<<endl<<DFA_finalStates.size();
-//    for(auto it=DFA_finalStates.begin();it!=DFA_finalStates.end();it++)
-//        cout<<" "<<*it;
-//    cout<<endl;
-//    for(int i=0;i<D;i++)
-//        for(int j=1;j<=M;j++)
-//            cout<<i<<" "<<j<<" "<<DFA_states[i]->Transitions[j]<<endl;
-//}
+//
 //bool minTable[MAX_STATE][MAX_STATE],temp[MAX_STATE][MAX_STATE];
 //bool changed()
 //{
@@ -220,19 +160,14 @@
 //            int flag=0;
 //            for(int j=0;j<nodes[cmp].size();j++)
 //            {
-////                cout<<i<<" "<<j<<endl;
 //                if(minTable[i][nodes[cmp][j]]||minTable[nodes[cmp][j]][i])
 //                {
 //                    flag=1;
-////                    cout<<"here"<<endl;
 //                    break;
 //                }
 //            }
 //            if(!flag)
-//            {
-////                cout<<cmp<<" "<<i<<" r"<<endl;
 //                dfs(cmp,i);
-//            }
 //        }
 //    }
 //}
@@ -240,15 +175,11 @@
 //void minimize()
 //{
 //    // accepting states can't be grouped with non-accepting states
-////    for(int i=0;i<D;i++)
-////        cout<<finalst[i]<<" ";
-////    cout<<endl;
 //    for(int i=0;i<D;i++)
-//        for(int j=i+1;j<D;j++)
+//        for(int j=0;j<D;j++)
 //        {
 //            if(finalst[i]!=finalst[j])
 //            {
-////                cout<<"here "<<i<<" "<<j<<endl;
 //                minTable[i][j]=minTable[j][i]=1,temp[i][j]=temp[j][i]=1;
 //            }
 //        }
@@ -270,100 +201,50 @@
 //                }
 //            }
 //    }while(changed());// stop when the table not changed
-//    for(int i=0;i<D;i++)minTable[i][i]=1;
+////    for(int i=0;i<D;i++)minTable[i][i]=1;
 //    for(int i=0;i<D;i++)
-//    {
 //        if(!visited[i])
-//        {
-//            component[i]=cmp;
-//            visited[i]=true;
 //            dfs(cmp++,i);
-//        }
-//    }
-//
 //}
-//void graphToNFA(vector<vector<pair<int,char> > > *g,std::map<int,std::string> finalNodesA)// change from one representation of the graph to another one
+//// change from one representation of the graph to another one
+//void graphToNFA(vector<vector<pair<int,char> > > *g,std::map<int,std::string> finalNodesA)
 //{
 //    N=g->size();
 //    NFA_states=new NFA_state[N+10];
-////    int f=finalNodesA.size();
-////    for(auto it=finalNodesA.begin();it!=finalNodesA.end();it++)
-////        NFA_finalStates.insert(*it);
 //    for(int i=0;i<N;i++)
 //    {
-////        cout<<"here "<<(*g)[i].size()<<endl;
 //        for(int j=0;j<(*g)[i].size();j++)
 //        {
 //            int from =i,input=(*g)[i][j].s,to=(*g)[i][j].f;
-////            cout<<from<<" "<<to<<" "<<input<<" t"<<endl;
 //            for(int k=0;k<MAX_STATE;k++)
 //            {
 //                if(NFA_states[from].transitions[input][k]==to)break;
-////                cout<<NFA_states[from].transitions[input][k]<<" h"<<endl;
 //                if(NFA_states[from].transitions[input][k]==-1)
 //                {
-////                    cout<<from<<" "<<to<<" "<<input<<" "<<k<<" t"<<endl;
 //                    NFA_states[from].transitions[input][k]=to;
 //                    break;
 //                }
 //            }
 //        }
 //    }
-//    cout<<endl;
 //}
 //set<int>minimized_final;
+//vector<pair<int,pair<string,int> > >Minimized_accepted_names_prio;//node name priority
 //int main()
 //{
-////    test();
-////    minimize();
-////    for(int i=0;i<D;i++,cout<<endl)
-////        for(int j=0;j<D;j++)
-////            cout<<minTable[i][j]<<" ";
-////    for(int i=0;i<D;i++)
-////        cout<<component[i]<<" ";
 //    InputTokenizer inpTok;
 //    inpTok.parseFile("input.txt");
 //    inpTok.printContents();
 //    NFABuilder nfaBuilder (inpTok);
-////    nfaBuilder.build();
-////    nfaBuilder.test();
 //    graphToNFA(nfaBuilder.buildFinal(),nfaBuilder.finalNodesA);
 //    finalNodesA=nfaBuilder.finalNodesA;
-////    cout<<finalNodesA.size()<<" tr\n";
-//
 //    priorities=nfaBuilder.priorities;
 //    M=128;
 //    NFA2DFA();
-//    // write DFA
-//    cout<<D<<" hhh "<<M<<endl<<DFA_finalStates.size()<<endl;
-////    for(int i=0;i<D;i++,cout<<endl)
-////    {
-////        cout<<"i : "<<i<<endl;
-////        for(int j=0;j<MAX_STATE;j++)
-////        {
-////            if(DFA_states[i]->NFA2DFA_states[j])
-////            {
-////                cout<<j<<" ";
-////            }
-////        }
-////    }
-////    for(auto it=DFA_finalStates.begin();it!=DFA_finalStates.end();it++)
-////        cout<<" "<<*it;
-////    cout<<endl;
-////    for(int i=0;i<D;i++)
-////        for(int j=1;j<=M;j++)
-////            cout<<i<<" "<<j<<" "<<DFA_states[i]->Transitions[j]<<endl;
-//
-//
+//    cout<<D<<" hhh "<<M<<endl;
+////    for(int i=0;i<DFA_finalStates.size();i++)
+////        cout<<DFA_states[DFA_finalStates[i]]->finalDFA_name<<endl;
 //    minimize();
-////    for(int i=0;i<D;i++,cout<<endl)
-////        for(int j=0;j<D;j++)
-////        {
-////            if(minTable[i][j])
-////                cout<<i<<" "<<j<<endl;
-////        }
-////    for(int i=0;i<D;i++)
-////        cout<<component[i]<<" ";
 //    cout<<cmp<<endl;
 //    for(int i=0;i<cmp;i++)
 //    {
@@ -374,25 +255,79 @@
 //        }
 //        cout<<endl;
 //    }
-////    for(int i=0;i<nodes[6].size();i++)
+//    cout<<"DFA final states size = "<<DFA_finalStates.size()<<endl;
+//    for(int i=0;i<cmp;i++)
+//    {
+//        int pr=10000000;
+//        string s="";
+//        for(int j=0;j<nodes[i].size();j++)
+//        {
+//            if(find(DFA_finalStates.begin(),DFA_finalStates.end(),nodes[i][j])!=DFA_finalStates.end() && DFA_states[nodes[i][j]]->prio < pr )
+//            {
+//                pr=DFA_states[nodes[i][j]]->prio;
+//                s =DFA_states[nodes[i][j]]->finalDFA_name;
+//            }
+//        }
+//        if(pr!=10000000)
+//        {
+//            cout<<pr<<" "<<s<<endl;
+//            Minimized_accepted_names_prio.pb(mp(i,mp(s,pr)));
+//        }
+//    }
+////    for(int i=0;i<DFA_finalStates.size();i++)
 ////    {
-////        for(int j=i+1;j<nodes[6].size();j++)
+////        if(minimized_final.find(component[DFA_finalStates[i]])==minimized_final.end())
 ////        {
-////            if(minTable[nodes[6][i]][nodes[6][j]])
-////            {
-////                cout<<"a7a ";
-////            }
+//////            cout<<"i : "<<DFA_finalStates[i]<<" "<<DFA_states[DFA_finalStates[i]]->finalState<<endl;
+////            minimized_final.insert(component[DFA_finalStates[i]]);
+////            Minimized_accepted_names_prio.pb(mp(component[DFA_finalStates[i]],mp(DFA_states[DFA_finalStates[i]]->finalDFA_name,DFA_states[DFA_finalStates[i]]->prio)));
 ////        }
 ////    }
-////    cout<<endl;
-//    for(int i=0;i<DFA_finalStates.size();i++)
-//    {
-//        minimized_final.insert(component[DFA_finalStates[i]]);
-//    }
-//    cout<<minimized_final.size()<<endl;
+//    cout<<"minimized final states size = "<<Minimized_accepted_names_prio.size()<<endl;
+//    for(auto it=Minimized_accepted_names_prio.begin();it!=Minimized_accepted_names_prio.end();it++)
+//        cout<<(*it).f<<" "<<(*it).s.f<<" "<<(*it).s.s<<endl;
+//
 //
 //    return 0;
 //}
+//
+//
+////void test()
+////{
+////    // read NFA
+////    cin>>N;
+////    M=10;
+////    NFA_states=new NFA_state[N+10];
+////    int f;
+////    cin>>f;
+////    for(int i=0;i<f;i++)
+////    {
+////        int x;
+////        cin>>x;
+////        NFA_finalStates.insert(x);
+////    }
+////    int t;
+////    cin>>t;
+////    while(t--)
+////    {
+////        int from,input,n,to;
+////        cin>>from>>input>>n;
+////        for(int i=0;i<n;i++)
+////        {
+////            cin>>to;
+////            NFA_states[from].transitions[input][i]=to;
+////        }
+////    }
+////    NFA2DFA();
+////    // write DFA
+////    cout<<D<<" "<<M<<endl<<DFA_finalStates.size();
+////    for(auto it=DFA_finalStates.begin();it!=DFA_finalStates.end();it++)
+////        cout<<" "<<*it;
+////    cout<<endl;
+////    for(int i=0;i<D;i++)
+////        for(int j=1;j<=M;j++)
+////            cout<<i<<" "<<j<<" "<<DFA_states[i]->Transitions[j]<<endl;
+////}
 ///*
 //11
 //1 10
@@ -443,7 +378,6 @@
 //3 1 1
 //3 2 2
 //*/
-//
 //
 ///*
 //10 2

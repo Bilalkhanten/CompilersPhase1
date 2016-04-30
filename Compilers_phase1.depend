@@ -1,46 +1,229 @@
 # depslib dependency file v1.0
-1460486312 source:c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.cpp
+1460640860 source:c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.cpp
 	"InputTokenizer.h"
 	<iostream>
 	<fstream>
 	<sstream>
 
-1459079086 c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.h
+1460548762 c:\users\mohamed\documents\workspace\lol_last\inputtokenizer.h
 	<map>
 	<vector>
 	<string>
 
-1460486700 source:c:\users\mohamed\documents\workspace\lol_last\main.cpp
+1459207614 source:c:\users\mohamed\documents\workspace\lol_last\main.cpp
+	<iostream>
+	<fstream>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"outputParser.h"
 
-1460489637 c:\users\mohamed\documents\workspace\lol_last\nfabuilder.h
+1460639722 c:\users\mohamed\documents\workspace\lol_last\nfabuilder.h
 	"InputTokenizer.h"
 	<vector>
 	<set>
 	<stack>
 
-1459103318 c:\users\mohamed\documents\workspace\lol_last\outputparser.h
+1460598494 c:\users\mohamed\documents\workspace\lol_last\outputparser.h
 	"NFABuilder.h"
 	<map>
 
-1460490829 source:c:\users\mohamed\documents\workspace\lol_last\main1.cpp
+1459195023 source:c:\users\mohamed\documents\workspace\lol_last\main1.cpp
 
-1460490756 source:c:\users\mohamed\documents\workspace\lol_last\nfabuilder.cpp
+1460596470 source:c:\users\mohamed\documents\workspace\lol_last\nfabuilder.cpp
 	"NFABuilder.h"
 	<stack>
 	<iostream>
 
-1459105810 source:c:\users\mohamed\documents\workspace\lol_last\outputparser.cpp
+1461975454 source:c:\users\mohamed\documents\workspace\lol_last\outputparser.cpp
 	"outputParser.h"
 	<fstream>
 	<iostream>
 
-1460476620 source:c:\users\mohamed\documents\workspace\lol_last\dfabuilder.cpp
-	"DFABuilder.h"
-
-1460478103 c:\users\mohamed\documents\workspace\lol_last\dfabuilder.h
-	"NFABuilder.h"
-
-1460490832 source:c:\users\mohamed\documents\workspace\lol_last\main_test.cpp
+1459154900 source:c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\inputtokenizer.cpp
+	"InputTokenizer.h"
 	<iostream>
+	<fstream>
+	<sstream>
+
+1459079086 c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\inputtokenizer.h
+	<map>
+	<vector>
+	<string>
+
+1459208721 source:c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\main.cpp
+
+1460403820 source:c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\main1.cpp
+	<bits/stdc++.h>
+	"InputTokenizer.h"
 	"NFABuilder.h"
+
+1459108310 c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\nfabuilder.h
+	"InputTokenizer.h"
+	<vector>
+	<set>
+	<stack>
+
+1459208543 source:c:\users\abdelrhman\desktop\finaaaaaaal\lol_last\nfabuilder.cpp
+	"NFABuilder.h"
+	<stack>
+	<iostream>
+
+1460555399 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\main1.cpp
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"NFA2DFA.h"
+
+1460548760 c:\users\abdelrhman\desktop\13-4-2016\lol_last\inputtokenizer.h
+	<map>
+	<vector>
+	<string>
+
+1460548764 c:\users\abdelrhman\desktop\13-4-2016\lol_last\nfabuilder.h
+	"InputTokenizer.h"
+	<vector>
+	<set>
+	<stack>
+
+1460548734 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\inputtokenizer.cpp
+	"InputTokenizer.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1460548772 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\nfabuilder.cpp
+	"NFABuilder.h"
+	<stack>
+	<iostream>
+
+1460548736 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\main .cpp
+
+1460556221 c:\users\abdelrhman\desktop\13-4-2016\lol_last\nfa2dfa.h
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+
+1460548779 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\outputparser.cpp
+	"outputParser.h"
+	<fstream>
+	<iostream>
+
+1460589010 c:\users\abdelrhman\desktop\13-4-2016\lol_last\outputparser.h
+	"NFABuilder.h"
+	<map>
+
+1460588660 source:c:\users\abdelrhman\desktop\13-4-2016\lol_last\nfa2dfa.cpp
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"NFA2DFA.h"
+	"outputParser.h"
+
+1460598091 source:h:\trash\lol_last\inputtokenizer.cpp
+	"InputTokenizer.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1460548762 h:\trash\lol_last\inputtokenizer.h
+	<map>
+	<vector>
+	<string>
+
+1460548738 source:h:\trash\lol_last\main .cpp
+
+1460597063 source:h:\trash\lol_last\nfa2dfa.cpp
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"NFA2DFA.h"
+	"outputParser.h"
+
+1460593883 h:\trash\lol_last\nfabuilder.h
+	"InputTokenizer.h"
+	<vector>
+	<set>
+	<stack>
+
+1460556222 h:\trash\lol_last\nfa2dfa.h
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+
+1460598493 h:\trash\lol_last\outputparser.h
+	"NFABuilder.h"
+	<map>
+
+1460596469 source:h:\trash\lol_last\nfabuilder.cpp
+	"NFABuilder.h"
+	<stack>
+	<iostream>
+
+1460598480 source:h:\trash\lol_last\outputparser.cpp
+	"outputParser.h"
+	<fstream>
+	<iostream>
+
+1460640859 source:c:\users\abdelrhman\desktop\lol_last\inputtokenizer.cpp
+	"InputTokenizer.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1460548762 c:\users\abdelrhman\desktop\lol_last\inputtokenizer.h
+	<map>
+	<vector>
+	<string>
+
+1460548738 source:c:\users\abdelrhman\desktop\lol_last\main .cpp
+
+1460596469 source:c:\users\abdelrhman\desktop\lol_last\nfabuilder.cpp
+	"NFABuilder.h"
+	<stack>
+	<iostream>
+
+1460639720 c:\users\abdelrhman\desktop\lol_last\nfabuilder.h
+	"InputTokenizer.h"
+	<vector>
+	<set>
+	<stack>
+
+1460641626 source:c:\users\abdelrhman\desktop\lol_last\outputparser.cpp
+	"outputParser.h"
+	<fstream>
+	<iostream>
+
+1460598493 c:\users\abdelrhman\desktop\lol_last\outputparser.h
+	"NFABuilder.h"
+	<map>
+
+1460641371 source:c:\users\abdelrhman\desktop\lol_last\nfa2dfa.cpp
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"NFA2DFA.h"
+	"outputParser.h"
+
+1460556222 c:\users\abdelrhman\desktop\lol_last\nfa2dfa.h
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+
+1460548738 source:c:\users\mohamed\documents\workspace\lol_last\main .cpp
+
+1461973666 source:c:\users\mohamed\documents\workspace\lol_last\mainellol.cpp
+	"NFA2DFA.h"
+	"outputParser.h"
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+	"NFA2DFA.h"
+	"outputParser.h"
+
+1461972957 c:\users\mohamed\documents\workspace\lol_last\nfa2dfa.h
+	<bits/stdc++.h>
+	"InputTokenizer.h"
+	"NFABuilder.h"
+
+1461973672 source:c:\users\mohamed\documents\workspace\lol_last\nfa2dfa.cpp
 

@@ -11,9 +11,13 @@ outputParser::outputParser(aGraph * g1, std::map<int,std::string> * fs)
 void outputParser::match(char * path)
 {
     ifstream inFile (path);
+    ofstream outFile ("tokens.txt");
     string line;
     while(inFile >> line){
-        int node = 0, lastMatched = -1, lastInd = -1,ind = 0;
+        int node = 0, lastMatched = -1, lastInd = -1,ind = 0,lastStart = 0;
+#ifdef DEBUG_MODE
+        cout<<line<<endl;
+#endif // DEBUG_MODE
         while(node < g->size() )
         {
             if(ind == line.size())
@@ -23,20 +27,26 @@ void outputParser::match(char * path)
                 {
                     //if could not match end of string
                     cout<<"error: end of string coultdn't be matched"<<endl;
-                    return;
+                    outFile<<line.substr(lastStart,line.size()-lastStart)<<" : error"<<endl;
+
+                    break;
                 }
                 else if(lastInd == ind -1)
                 {
                     //if no more characters to parse
-                    return;
+                    outFile<<removeSlash((*finalStates)[lastMatched])<<endl;
+//                    outFile<<line.substr(lastStart,lastInd-lastStart+1)<<" : "<<removeSlash((*finalStates)[lastMatched])<<endl;                    break;
+                    break;
                 }
                 else
                 {
                     //return to the last final state
-                    cout<<(*finalStates)[lastMatched]<<endl;
+                    outFile<<removeSlash((*finalStates)[lastMatched])<<endl;
+//                    outFile<<line.substr(lastStart,lastInd-lastStart+1)<<" : "<<removeSlash((*finalStates)[lastMatched])<<endl;
                     lastMatched = -1;
                     ind = lastInd+1;
                     node = 0;
+                    lastStart = ind;
                 }
             }
             int toNode = findEdge(node,line[ind]);
@@ -44,14 +54,17 @@ void outputParser::match(char * path)
             {
                 if(lastMatched == -1)
                 {
-                    cout<<"error"<<endl;
-                    return;
+//                    cout<<"error"<<endl;
+                    outFile<<line.substr(lastStart,line.size()-lastStart)<<" : error"<<endl;
+                    break;
                 }
                 //no transition matching this state
-                cout<<(*finalStates)[lastMatched]<<endl;
+                outFile<<removeSlash((*finalStates)[lastMatched])<<endl;
+//                outFile<<line.substr(lastStart,lastInd-lastStart+1)<<" : "<<removeSlash((*finalStates)[lastMatched])<<endl;
                 lastMatched = -1;
                 ind = lastInd+1;
                 node = 0;
+                lastStart = ind;
             }
             else if(finalStates->find(toNode) != finalStates->end())
             {
@@ -74,10 +87,31 @@ int outputParser::findEdge(int node, char ch)
     {
         if((*g)[node][i].second == ch)
         {
-            return (*g)[node][i].first;
+            if (!isDummy((*g)[node][i].first))
+                return (*g)[node][i].first;
+            break;
         }
     }
     return -1;
+}
+bool outputParser::isDummy(int node)
+{
+    for(int i = 0; i < (*g)[node].size() ; i++)
+    {
+         if((*g)[node][i].first != node)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+string outputParser::removeSlash(string s)
+{
+    if(s[0] == '\\')
+    {
+        return s.substr(1,s.size()-1);
+    }
+    return s;
 }
 outputParser::~outputParser()
 {

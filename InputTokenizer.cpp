@@ -200,7 +200,7 @@ string InputTokenizer::substitue(string str)
     while(ss>>temp)
     {
         if(regDefn.find(temp) != regDefn.end() ){
-            finalStr += substitue(regDefn[temp]);//recursive call        }
+            finalStr += "(" + substitue(regDefn[temp]) + ")";//recursive call        }
         }
         else
         {
